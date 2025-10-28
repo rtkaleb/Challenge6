@@ -246,6 +246,195 @@ Frontend bootstrap (example):
 - README endpoints table matches actual behavior.
 - Evidence: screenshots in `docs/screenshots/` (placeholders now).
 
+esponse handling | `Gson` + `JsonTransformer` |
+| Logging | `logback.xml` + `afterAfter` request logging |
+| Manual tests | Postman collection steps included |
+| Decisions log | `DECISIONS.md` template provided |
+| Detailed README | This file |
+
+**Endpoints implemented:**
+
+| Method | Path | Description |
+|---|---|---|
+| GET | `/users` | List all users |
+| GET | `/users/:id` | Get user by ID |
+| POST | `/users/:id` | Create or replace user with given ID |
+| PUT | `/users/:id` | Update fields of an existing user |
+| OPTIONS | `/users/:id` | Check existence (`X-User-Exists` header) |
+| DELETE | `/users/:id` | Delete user by ID |
+
+---
+
+## 🧱 Tech Stack
+
+- **Java 17**
+- **Spark Java** (lightweight web framework)
+- **Maven** (build & dependencies)
+- **Gson** (JSON serialization)
+- **Logback** (logging)
+- **Postman** (manual testing)
+
+---
+
+## 📂 Project Structure
+
+```
+spark-users-api/
+  ├─ pom.xml
+  └─ src/
+     ├─ main/
+     │  ├─ java/com/ramon/collectibles/
+     │  │  ├─ App.java
+     │  │  ├─ model/User.java
+     │  │  ├─ service/UserService.java
+     │  │  ├─ http/JsonTransformer.java
+     │  │  └─ routes/UserRoutes.java
+     │  └─ resources/
+     │     └─ logback.xml
+     └─ test/java/  (optional for later)
+```
+
+Design choices:
+- Clear separation of concerns: **model**, **service**, **routes**, **http utils**.
+- In-memory data store for Sprint 1 to speed up delivery and testing.
+- Ready for DB integration and WebSockets in later sprints.
+
+---
+
+## ⚙️ Setup & Run (Windows PowerShell)
+
+Prerequisites:
+- Java 17+
+- Maven
+
+Verify:
+```powershell
+java -version
+mvn -v
+```
+
+Build:
+```powershell
+mvn -q clean package
+```
+
+Run:
+```powershell
+java -jar .\target\spark-users-api-1.0.0-shaded.jar
+```
+
+Default URL:
+```
+http://localhost:4567
+```
+
+---
+
+## 🧪 Testing With Postman (recommended)
+
+1. Open **Postman** → **Import** → Create the following requests manually or copy these details.
+2. Use this base URL variable if you prefer: `{{base}} = http://localhost:4567`.
+
+### Expected JSON payload example:
+```json
+{
+  "name": "Sofia",
+  "email": "sofia@example.com"
+}
+```
+
+### Validations
+- Status codes: 200, 201, 204, 404
+- JSON encoded responses
+- Logging output visible in console
+- CORS enabled for testing
+
+---
+
+## 🔗 API Summary & Conventions
+
+- Response type: `application/json`
+- Basic CORS for development
+- Minimal error structure:
+  ```json
+  { "error": "User not found" }
+  ```
+
+---
+
+## 🧭 Decisions Log (add as `DECISIONS.md`)
+
+```markdown
+# Decisions Log — Challenge 6 Sprint 1
+
+## 2025-10-28 — Stack: Spark + Gson + Logback
+- Decision: Spark for minimal routing, Gson for JSON, Logback for logs.
+- Rationale: Low boilerplate, fast learning curve, quick to validate via Postman.
+- Impact: Accelerates Sprint 1; keeps options open for Sprints 2–3.
+
+## 2025-10-28 — Endpoint style: POST /users/:id
+- Context: Challenge requires POST with id in path.
+- Decision: Create/replace semantics at POST /users/:id.
+- Risk: Slightly atypical REST; mitigated by clear docs.
+- Impact: Meets rubric and instructions precisely.
+
+## 2025-10-28 — In-memory store for Sprint 1
+- Decision: ConcurrentHashMap instead of DB.
+- Rationale: Focus on routes and correctness first.
+- Impact: Stateless between restarts accepted for Sprint 1.
+
+## 2025-10-28 — CORS for development
+- Decision: Enable permissive CORS during dev/testing.
+- Mitigation: Restrict in production.
+```
+
+---
+
+## 🧯 Troubleshooting
+
+- **Port already in use**
+  Change the port:
+  ```powershell
+  $env:PORT="8080"
+  java -jar .\target\spark-users-api-1.0.0-shaded.jar
+  ```
+
+- **`java` or `mvn` not recognized**
+  Install JDK 17+ and Maven, then reopen PowerShell so PATH updates apply.
+
+- **CORS errors from a frontend**
+  CORS here is open for dev. For production, restrict origins and methods.
+
+---
+
+## 📸 Evidence – Screenshots
+
+Below is the visual evidence demonstrating Sprint 1 progress, development, correct API behavior, and version control usage.
+
+| No. | Screenshot | Description |
+|-----|-------------|-------------|
+| 1 | ![Project Initialization](screenshots/00-maven-project.png) | Maven project successfully created and configured with Java 17 and required dependencies (Spark, Gson, Logback). |
+| 2 | ![Server Running](screenshots/01-server-start.png) | Application running correctly using the shaded JAR and listening on port 4567. |
+| 3 | ![GET /users (initial)](screenshots/02-get-users-empty.png) | API returns an empty list `[]` indicating a clean state before any user creation. |
+| 4 | ![POST User](screenshots/03-post-user.png) | Successful execution of POST `/users/:id` creating a new user instance (201 Created). |
+| 5 | ![GET User by ID](screenshots/04-get-user-id.png) | JSON response showing stored user data retrieved correctly from memory. |
+| 6 | ![PUT Update User](screenshots/05-put-update-user.png) | Updated user details using PUT `/users/:id`, showing modified email/name fields. |
+| 7 | ![OPTIONS Existence Check](screenshots/06-options-user.png) | OPTIONS request confirming existence of a user through the `X-User-Exists: true` header. |
+| 8 | ![DELETE User](screenshots/07-delete-user.png) | Successful deletion of the user instance with response status `204 No Content`. |
+| 9 | ![GET User Not Found](screenshots/08-get-user-notfound.png) | Correct error handling after deletion: returns `404` + `{ "error": "User not found" }`. |
+| 10 | ![GitHub Repository](screenshots/09-github-upload.png) | Source code uploaded and version-controlled in GitHub repository following Sprint delivery. |
+
+
+
+---
+## 🧱 Next Steps (Sprints 2 & 3)
+
+- Add persistence (SQL or MongoDB).
+- Add WebSockets for real-time price updates.
+- Add Mustache templates or frontend integration.
+- Strengthen validation, error payloads, and auth.
+
+
 ---
 
 ## Sprint 2 — UI Templates & Exception Handling
