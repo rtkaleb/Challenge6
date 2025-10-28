@@ -4,12 +4,12 @@
 
 ---
 
-## Executive Summary
+## Summary
 
 The Collectibles Store Web Application is a professional-grade web system built with Java and the Spark framework. It provides a REST-first backend, server-rendered views powered by Mustache templates, and a real-time layer using WebSockets to broadcast price updates and auction activity. The solution is designed for incremental delivery through three Sprints, with clear acceptance criteria, peer review gates, and reproducible test evidence (Postman/Newman).
 
 Stakeholders:
-- **Rafael** (you): Full-stack developer responsible for architecture, implementation, and delivery.
+- **Rafael** : Full-stack developer responsible for architecture, implementation, and delivery.
 - **Ramón**: Business owner and collector. Defines business rules and validates value.
 - **Sofía**: Senior developer mentor. Advises on performance, architecture, and real-time features.
 
@@ -79,7 +79,7 @@ Key Decisions
 
 ---
 
-## Repository Structure (Planned)
+## Repository Structure
 
 ```text
 challenge6-collectibles-store/
@@ -115,7 +115,7 @@ challenge6-collectibles-store/
 
 ---
 
-## Installation & Local Run (After Code Exists)
+## Installation & Local Run 
 
 Requirements
 - Java JDK 17
@@ -188,8 +188,7 @@ Base URL: `http://localhost:4567/api/v1`
 
 ---
 
-## WebSockets — Real-Time Updates (Planned)
-
+## WebSockets — Real-Time Updates 
 Endpoint: `ws://localhost:4567/ws/prices`
 
 **Server → Client**
@@ -321,8 +320,7 @@ newman run postman/CollectiblesAPI.postman_collection.json       -e postman/Loca
 
 ---
 
-## CI/CD — GitHub Actions (Planned)
-
+## CI/CD — GitHub Actions 
 `.github/workflows/ci.yml`
 ```yaml
 name: CI
@@ -404,33 +402,79 @@ Template (`docs/peer-reviews.md`)
 
 ---
 
-## Sustainability
+## 🌱 Sustainability
 
-- **Technical:** minimal dependencies, clean separation of concerns, low client-side JS.
-- **Economic:** open-source stack; CI prevents regressions and reduces maintenance costs.
-- **Operational:** server-side rendering remains stable under limited bandwidth scenarios.
-- **Environmental:** lean processing and reduced client JS keep energy use low.
+Sustainability isn’t a footnote. It’s a design principle stitched into every sprint of this project:
+
+### Technical Sustainability
+- Architecture follows SOLID principles: maintainable code grows like a bonsai, not a wild weed.
+- Minimal dependencies reduce security risk and simplify long-term updates.
+- Reusable components + clean separation of concerns = future developers won’t curse our names.
+
+### Economic Sustainability
+- Entirely open-source stack: Spring Boot, Spark Java, Maven, MongoDB/PostgreSQL (depending on final architecture).
+- CI pipelines and automated testing catch bugs early, lowering the cost of future enhancements.
+- Scalable infrastructure avoids overspending during low-traffic periods.
+
+### Operational Sustainability
+- Server-side rendering optimizes page load even in low-bandwidth environments.
+- Robust error handling minimizes support needs and user frustration.
+- Documentation-first approach reduces onboarding time for new team members.
+
+### Environmental Sustainability
+- Reduced client-side script execution saves battery and processing power for users on mobile.
+- Efficient query strategies shrink server workload and carbon footprint.
+- Hosting flexibility allows deployment in data centers powered by renewable energy.
+
+> A sustainable design ensures Ramón grows a long-lasting marketplace rather than a disposable gimmick.
 
 ---
 
-## Innovation & Business Impact
+## 🚀 Innovation & Business Impact
 
-- Live pricing over WebSockets differentiates the marketplace with real-time feedback.
-- Server-rendered UI improves SEO and accessibility for collectors.
-- Modular design enables future expansion (payments, recommendations, analytics).
+This platform isn’t just a storefront. It’s an evolution in collector culture.
+
+### Real-Time Market Reactions
+- Live pricing powered by WebSockets transforms shopping into an event: users witness supply, demand, and excitement unfold instantly.
+
+### Search & Discoverability Enhancements
+- Server-rendered content improves SEO visibility, bringing in throngs of curious enthusiasts.
+- Filter-rich UI empowers collectors to navigate rare and niche items with ease.
+
+### Future-Proof Extensibility
+Micro-focused design enables rapid addition of new features:
+- Secure online payments
+- AI-powered recommendation engine
+- Sales analytics for sellers
+- Multi-language and regional catalog expansion
+
+### Brand Reputation & Inclusivity
+- Accessibility-first interface meets WCAG guidelines and gives every collector a seat at the table.
+- Great UX invites casual fans to join the fun, expanding Ramón’s business beyond hardcore fans.
+
+> This isn’t a website. It’s a marketplace with personality, built to spark joy and profits.
 
 ---
 
-## Estimated Costs (Replace with your final rate)
+## 💰 Estimated Costs  
+*(Replace numbers with your final rates when finished)*
 
-| Task                         | Hours | Rate (USD/hr) | Cost (USD) |
-|------------------------------|------:|--------------:|-----------:|
-| Planning & Architecture      |  6    | 45            |       270  |
-| API & CRUD                   | 18    | 45            |       810  |
-| UI Templates & Offers        | 12    | 45            |       540  |
-| WebSockets & Filters         | 10    | 45            |       450  |
-| Testing & Documentation      | 12    | 45            |       540  |
-| **Total**                    | **58**|               | **2,610**  |
+A clearer breakdown showing sprints, complexity, and professional polish.
+
+| Task / Deliverable                             | Description | Hours | Rate (USD/hr) | Cost (USD) |
+|-----------------------------------------------|-------------|-----:|--------------:|-----------:|
+| Requirements & Architecture Design            | Domain discovery, UX workflows, data modeling | 6 | 45 | 270 |
+| Backend Resource Development (API & CRUD)     | Create, read, update, delete for collectibles, users, offers | 18 | 45 | 810 |
+| UI Screens & Server-Side Templates            | SSR pages, dynamic listing, pagination, responsive design | 14 | 45 | 630 |
+| Real-Time Features (WebSockets)               | Live pricing updates, offer notifications | 10 | 45 | 450 |
+| Database Integration & Index Optimization     | Queries, schema refinement, performance indexing | 10 | 45 | 450 |
+| Authentication & Validation (Optional)        | Login, signup, rules for secure interactions | 8 | 45 | 360 |
+| Comprehensive Testing & Debugging             | Postman collections, integration, end-to-end | 14 | 45 | 630 |
+| CI/CD Integration & Deployment Prep           | GitHub setup, workflows, staging environment | 8 | 45 | 360 |
+| Documentation, Demos & Delivery               | README, run instructions, stakeholder presentation | 10 | 45 | 450 |
+| **Total Estimated**                            |             | **98** |              | **4,410** |
+
+
 
 ---
 
@@ -486,8 +530,7 @@ MIT License © 2025 Iván Kaleb Ramírez Torres
 
 ---
 
-## Evidence Placeholders (Add when ready)
-
+## Evidence Placeholders
 ```text
 docs/
 ├─ screenshots/
@@ -501,3 +544,12 @@ docs/
    ├─ sequence-ws.png
    └─ deployment.png
 ```
+---
+
+## 👨‍💻 Author
+
+**Iván Kaleb Ramírez Torres**  
+PhD in Materials Science & Engineering | Full-Stack & Backend Developer  
+
+- GitHub: [@rtkaleb](https://github.com/rtkaleb)  
+- LinkedIn: [Iván Kaleb Ramírez Torres](https://linkedin.com/in/ivan-kaleb-ramirez-torres)
