@@ -1,0 +1,20 @@
+.page-shell {
+  width: 100%;
+}
+
+.page-container {
+  width: 100%;
+  max-width: 1920px;   /* límite */
+  margin: 0 auto;      /* centra cuando el viewport > 1920px */
+  padding: 0 24px;     /* respiro lateral */
+  box-sizing: border-box;
+}
+
+/* evita desbordes de medios */
+.page-container img,
+.page-container video,
+.page-container canvas,
+.page-container svg {
+  max-width: 100%;
+  height: auto;
+}
